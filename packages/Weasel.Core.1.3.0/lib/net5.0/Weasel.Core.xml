@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weasel.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddParameter(System.Object,System.Nullable{`4})">
+            <summary>
+                Adds a parameter to the underlying command, but does NOT add the
+                parameter usage to the command text
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.Object,System.Nullable{`4})">
+            <summary>
+            Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.String)">
+            <summary>
+                Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.Boolean)">
+            <summary>
+                Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.Int32)">
+            <summary>
+                Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.Double)">
+            <summary>
+                Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddNamedParameter(System.String,System.Int64)">
+            <summary>
+                Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AppendParameter(System.Object,System.Nullable{`4})">
+            <summary>
+                Append a parameter with the supplied value to the underlying command
+            parameter collection *and* the command text
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AppendParameter(System.Int32)">
+            <summary>
+             Append a parameter with the supplied value to the underlying command
+            parameter collection *and* the command text
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AppendParameter(System.Guid)">
+            <summary>
+            Append a parameter with the supplied value to the underlying command
+            parameter collection *and* the command text
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AppendParameter(System.String)">
+            <summary>
+                Append a parameter with the supplied value to the underlying command parameter
+                collection and adds the parameter usage to the SQL
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandBuilderBase`6.AddParameters(System.Object)">
+            <summary>
+            For each public property of the parameters object, adds a new parameter
+            to the command with the name of the property and the current value of the property
+            on the parameters object. Does *not* affect the command text
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.ToCommandBuilder(System.Data.Common.DbConnection)">
+            <summary>
+            Create a CommandBuilder around the DbConnection
+            </summary>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.Sql``1(``0,System.String)">
+            <summary>
+            Set the CommandText on this DbCommand in a Fluent Interface style
+            </summary>
+            <param name="cmd"></param>
+            <param name="sql"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.CallsSproc``1(``0,System.String)">
+            <summary>
+            Set the command text of the command object to a stored procedure name and
+            change the command type to StoredProcedure in a fluent interface style
+            </summary>
+            <param name="cmd"></param>
+            <param name="storedProcedureName"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.CallsSproc``1(``0,Weasel.Core.DbObjectName)">
+            <summary>
+            Set the command text of the command object to a stored procedure name and
+            change the command type to StoredProcedure in a fluent interface style
+            </summary>
+            <param name="cmd"></param>
+            <param name="storedProcedureName"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.RunSql(System.Data.Common.DbConnection,System.String[])">
+            <summary>
+            Execute all of the SQL statements against the supplied DbConnection. This assumes
+            that the connection is already open
+            </summary>
+            <param name="conn"></param>
+            <param name="sqls"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.CreateCommand(System.Data.Common.DbConnection,System.String)">
+            <summary>
+            Create a new DbCommand attached to the connection with the supplied
+            CommandText
+            </summary>
+            <param name="conn"></param>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.CreateCommand(System.Data.Common.DbTransaction,System.String)">
+            <summary>
+            Create a new DbCommand enlisted in the current transaction and connection
+            </summary>
+            <param name="tx"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.FetchList``1(System.Data.Common.DbCommand,System.Func{System.Data.Common.DbDataReader,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+            <summary>
+            Execute the supplied command as a data reader and convert each row to an object
+            of type T with the supplied transform function
+            </summary>
+            <param name="cmd"></param>
+            <param name="transform"></param>
+            <param name="cancellation"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.FetchList``1(System.Data.Common.DbCommand,System.Threading.CancellationToken)">
+            <summary>
+            Execute the command return a list of the values in the first column 
+            </summary>
+            <param name="cmd"></param>
+            <param name="cancellation"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.FetchOne``1(System.Data.Common.DbCommand,System.Threading.CancellationToken)">
+            <summary>
+            Execute the command and return the value in the first column and row as type
+            T. If there is no data returned, this function will return default(T)
+            </summary>
+            <param name="cmd"></param>
+            <param name="cancellation"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.ExecuteOnce(System.Data.Common.DbCommand,System.Threading.CancellationToken)">
+            <summary>
+            Open the attached connection, execute the command, and close the connection
+            in one call. This assumes that the connection is not already open
+            </summary>
+            <param name="command"></param>
+            <param name="cancellation"></param>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.AddParameter(System.Data.Common.DbCommand,System.Object,System.Nullable{System.Data.DbType})">
+            <summary>
+            Add a single parameter to a DbCommand with the supplied value and optional DbType
+            </summary>
+            <param name="command"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.CommandExtensions.AddNamedParameter(System.Data.Common.DbCommand,System.String,System.Object,System.Nullable{System.Data.DbType})">
+            <summary>
+            Find or add a single DbParameter with the supplied name. Will set the parameter value and DbType
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Core.DatabaseProvider`6.AddNamedParameter(`0,System.String,System.Object,System.Nullable{`4})">
+            <summary>
+            Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Weasel.Core.EnumStorage">
+            <summary>
+            Governs how .Net Enum types are persisted
+            in the serialized JSON
+            </summary>
+        </member>
+        <member name="F:Weasel.Core.EnumStorage.AsInteger">
+            <summary>
+            Serialize Enum values as their integer value
+            </summary>
+        </member>
+        <member name="F:Weasel.Core.EnumStorage.AsString">
+            <summary>
+            Serialize Enum values as their string value
+            </summary>
+        </member>
+    </members>
+</doc>

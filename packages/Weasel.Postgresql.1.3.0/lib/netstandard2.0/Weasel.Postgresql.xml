@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weasel.Postgresql</name>
+    </assembly>
+    <members>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.GetGlobalTxLock(Npgsql.NpgsqlTransaction,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Retrieve a global, shared lock at the transaction level for the given lock id. This will block until
+            it is able to attain the lock
+            </summary>
+            <param name="tx">The current transaction</param>
+            <param name="lockId">The identity of the lock</param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.TryGetGlobalTxLock(Npgsql.NpgsqlTransaction,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Attempt to attain a shared lock for the duration of the transaction. This method
+            will return a boolean designating whether or not it was able to attain
+            the shared lock.
+            </summary>
+            <param name="tx"></param>
+            <param name="lockId"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.GetGlobalLock(Npgsql.NpgsqlConnection,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Attempts to attain a shared lock at the session level that will be retained until the connection is closed.
+            This will block until it attains the lock.
+            </summary>
+            <param name="conn"></param>
+            <param name="lockId"></param>
+            <param name="cancellation"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.TryGetGlobalLock(Npgsql.NpgsqlConnection,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Attempts to attain a shared lock at the session level. This method
+            will return a boolean designating whether or not it was able to attain
+            the shared lock.
+            </summary>
+            <param name="conn"></param>
+            <param name="lockId"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.TryGetGlobalLock(Npgsql.NpgsqlConnection,System.Int32,Npgsql.NpgsqlTransaction,System.Threading.CancellationToken)">
+            <summary>
+            Attempts to attain a shared lock at the session level. This method
+            will return a boolean designating whether or not it was able to attain
+            the shared lock.
+            </summary>
+            <param name="conn"></param>
+            <param name="lockId"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.AdvisoryLockExtensions.ReleaseGlobalLock(Npgsql.NpgsqlConnection,System.Int32,System.Threading.CancellationToken,Npgsql.NpgsqlTransaction)">
+            <summary>
+            Explicitly releases a shared lock. The transaction is an optional argument.
+            </summary>
+            <param name="conn"></param>
+            <param name="lockId"></param>
+            <param name="cancellation"></param>
+            <param name="tx"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Weasel.Postgresql.AutoCreate.All">
+            <summary>
+            Will drop and recreate tables that do not match the Marten configuration or create new ones
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.AutoCreate.CreateOrUpdate">
+            <summary>
+            Will never destroy existing tables. Attempts to add missing columns or missing tables
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.AutoCreate.CreateOnly">
+            <summary>
+            Will create missing schema objects at runtime, but will not update or remove existing schema objects
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.AutoCreate.None">
+            <summary>
+            Do not recreate, destroy, or update schema objects at runtime. Will throw exceptions if
+            the schema does not match the Marten configuration
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.CommandBuilder.AppendParameter(System.String[])">
+            <summary>
+                Append a parameter with the supplied value to the underlying command parameter
+                collection and adds the parameter usage to the SQL
+            </summary>
+            <param name="value"></param>
+            <param name="dbType"></param>
+        </member>
+        <member name="M:Weasel.Postgresql.CommandExtensions.AddNamedParameter(Npgsql.NpgsqlCommand,System.String,System.Object,System.Nullable{NpgsqlTypes.NpgsqlDbType})">
+            <summary>
+            Finds or adds a new parameter with the specified name and returns the parameter
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Weasel.Postgresql.CreationStyle.DropThenCreate">
+            <summary>
+            Export DDL by first issuing a DROP statement for a table, then the CREATE statement. This is the default
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.CreationStyle.CreateIfNotExists">
+            <summary>
+            Export DDL for table creation by using a CREATE IF NOT EXISTS clause w/o a prior DROP statement
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.DdlRules.IsTransactional">
+            <summary>
+            Should all generated DDL files be written with transactional semantics
+            so that everything succeeds or everything fails together
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.DdlRules.TableCreation">
+            <summary>
+                Alters the syntax used to create tables in DDL
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.DdlRules.UpsertRights">
+            <summary>
+                Alters the user rights for the upsert functions in DDL
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.DdlRules.Role">
+            <summary>
+                Option to use this database role during DDL scripts
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.DdlRules.ReadTemplates(System.String)">
+            <summary>
+            Read [name].table and [name].function files from the named directory
+            to serve as templates for extra DDL (GRANT's probably)
+            </summary>
+            <param name="directory"></param>
+        </member>
+        <member name="M:Weasel.Postgresql.DdlRules.ReadTemplates">
+            <summary>
+            Read DDL templates from the application base directory
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.DdlRules.WriteTemplatedFile(System.String,System.Action{Weasel.Postgresql.DdlRules,System.IO.TextWriter})">
+            <summary>
+            Write templated SQL to the supplied file name
+            </summary>
+            <param name="filename"></param>
+            <param name="writeStep"></param>
+        </member>
+        <member name="M:Weasel.Postgresql.DdlRules.WriteScript(System.IO.TextWriter,System.Action{Weasel.Postgresql.DdlRules,System.IO.TextWriter})">
+            <summary>
+            Write out a templated SQL script with all rules
+            </summary>
+            <param name="writer"></param>
+            <param name="writeStep">A continuation to write the inner SQL</param>
+        </member>
+        <member name="T:Weasel.Postgresql.Extension">
+            <summary>
+            Used to register Postgresql extensions
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.ISchemaObject.ConfigureQueryCommand(Weasel.Postgresql.CommandBuilder)">
+            <summary>
+            Register the necessary queries to check the existing state of this schema
+            object in the database
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="P:Weasel.Postgresql.SchemaMigration.UpdateSql">
+            <summary>
+            The SQL that will be executed to update this migration
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.SchemaMigration.RollbackSql">
+            <summary>
+            The SQL to rollback the application of this migration
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.SchemaObjectsExtensions.ToCreateSql(Weasel.Postgresql.ISchemaObject,Weasel.Postgresql.DdlRules)">
+            <summary>
+            Write the creation SQL for this ISchemaObject
+            </summary>
+            <param name="object"></param>
+            <param name="rules"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Weasel.Postgresql.SecurityRights.Invoker">
+            <summary>
+            Upsert functions will execute with the rights of the current Postgresql user. This is the default
+            in both Marten and Postgresql.
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.SecurityRights.Definer">
+            <summary>
+            Upsert functions will execute with the rights of the Postgresql user that created the schema
+            objects.
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.SqlGeneration.ComparisonFilter.NotOperators">
+            <summary>
+            Used for NOT operator conversions
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.SqlGeneration.ComparisonFilter.OppositeOperators">
+            <summary>
+            Used when reordering a Binary comparison
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.SqlGeneration.IReversibleWhereFragment.Reverse">
+            <summary>
+            Effectively create a "reversed" NOT where fragment
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.SqlGeneration.SqlFragmentExtensions.CombineAnd(Weasel.Postgresql.SqlGeneration.ISqlFragment,Weasel.Postgresql.SqlGeneration.ISqlFragment)">
+            <summary>
+            Combine an "and" compound filter with the two filters
+            </summary>
+            <param name="filter"></param>
+            <param name="fragments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.SqlGeneration.SqlFragmentExtensions.CombineAnd(Weasel.Postgresql.SqlGeneration.ISqlFragment,System.Collections.Generic.IReadOnlyList{Weasel.Postgresql.SqlGeneration.ISqlFragment})">
+            <summary>
+            If extras has any items, return an "and" compound fragment. Otherwise return the original filter
+            </summary>
+            <param name="filter"></param>
+            <param name="fragments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.ForeignKey.Parse(System.String)">
+            <summary>
+            Read the DDL definition from the server
+            </summary>
+            <param name="definition"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.Name">
+            <summary>
+            The index name used for the index definition
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.Method">
+            <summary>
+            Set the index method using <see cref="T:Weasel.Postgresql.Tables.IndexMethod"/>
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.CustomMethod">
+            <summary>
+            Set custom index method not defined in <see cref="T:Weasel.Postgresql.Tables.IndexMethod"/>
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.SortOrder">
+            <summary>
+             Set sort order for a btree index column/expression
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.NullsSortOrder">
+            <summary>
+            Set the null sort order for a btree index column/expression
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.IsUnique">
+            <summary>
+            Option to create unique index
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.IsConcurrent">
+            <summary>
+            Option to build index without taking any locks that prevent concurrent inserts, updates or deletes in table
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.IncludeColumns">
+            <summary>
+            Define the columns part of the include clause
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.Mask">
+            <summary>
+            Pattern for surrounding the columns. Use a `?` character
+            for the location of the columns, like "? jsonb_path_ops"
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.AgainstColumns(System.String[])">
+            <summary>
+            Set the Index expression against the supplied columns
+            </summary>
+            <param name="columns"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.TableSpace">
+            <summary>
+            The tablespace in which to create the index. If not specified, default_tablespace is consulted,
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.Predicate">
+            <summary>
+            The constraint expression for a partial index.
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.Collation">
+            <summary>
+            Set the collation to be used for the column/expression part of the index
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.ToDDL(Weasel.Postgresql.Tables.Table)">
+            <summary>
+            Method to get the DDL statement for the index definition
+            </summary>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.CanonicizeCast(System.String)">
+            <summary>
+            Method to normalize a column definition for checking match/equivalene
+            </summary>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.FillFactor">
+            <summary>
+            Set a non-default fill factor on this index
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.IndexDefinition.StorageParameters">
+            <summary>
+            Method to define the index storage parameters
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.ToGinWithJsonbPathOps">
+            <summary>
+            Makes this index use the Gin method with the jsonb_path_ops operator
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.Matches(Weasel.Postgresql.Tables.IndexDefinition,Weasel.Postgresql.Tables.Table)">
+            <summary>
+            Method to check if the index definition matches with a passed index definition
+            </summary>
+            <param name="actual"></param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.AssertMatches(Weasel.Postgresql.Tables.IndexDefinition,Weasel.Postgresql.Tables.Table)">
+            <summary>
+            Method to assert if the index definition matches with a passed index definition
+            </summary>
+            <param name="actual"></param>
+            <param name="parent"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.IndexDefinition.CanonicizeDdl(Weasel.Postgresql.Tables.IndexDefinition,Weasel.Postgresql.Tables.Table)">
+            <summary>
+            Method to normalize the index definition to use for checking match/equivalence
+            </summary>
+            <param name="index"></param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Weasel.Postgresql.Tables.NullsSortOrder">
+            <summary>
+            Specifies the null sort order
+            </summary>
+        </member>
+        <member name="T:Weasel.Postgresql.Tables.SortOrder">
+            <summary>
+            Specifies the direction used to sort items
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.Tables.SortOrder.Asc">
+            <summary>
+            Sorts in ascending order, from smallest to largest
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.Tables.SortOrder.Desc">
+            <summary>
+            Sorts in descending order, from largest to smallest
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.Tables.PartitionStrategy.None">
+            <summary>
+            No partitioning
+            </summary>
+        </member>
+        <member name="F:Weasel.Postgresql.Tables.PartitionStrategy.Range">
+            <summary>
+            Postgresql PARTITION BY RANGE semantics
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.Table.MaxIdentifierLength">
+            <summary>
+            Max identifier length for identifiers like table name, column name, constraints, primary key etc
+            </summary>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.Table.PartitionStrategy">
+            <summary>
+            PARTITION strategy for this table
+            </summary>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.Table.ToBasicCreateTableSql">
+            <summary>
+            Generate the CREATE TABLE SQL expression with default
+            DDL rules. This is useful for quick diagnostics
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Weasel.Postgresql.Tables.Table.ColumnExpression.AsPrimaryKey">
+            <summary>
+            Marks this column as being part of the parent table's primary key
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Weasel.Postgresql.Tables.ColumnCheck.Name">
+            <summary>
+            The database name for the check. This can be null
+            </summary>
+        </member>
+    </members>
+</doc>

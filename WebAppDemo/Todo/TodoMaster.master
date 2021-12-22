@@ -1,0 +1,4 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TodoMaster.master.cs" Inherits="WebAppDemo.Todo.TodoMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+</asp:Content>
